@@ -53,7 +53,15 @@ app.get("/", async (req, res) => {
   });
 });
 app.post("/", async (req, res) => {
-  console.log(req.body); 
+  console.log("+++++++++++++++++++++++++GOT PAYLOAD+++++++++++++++++++++++++");
+
+  console.log(req.body);
+
+  console.log("+++++++++++++++++++++++++GOT PAYLOAD+++++++++++++++++++++++++");
+
+  console.log("+++++++++++++++++++++++++GOT REQUEST+++++++++++++++++++++++++");
+  console.log(req);
+  console.log("+++++++++++++++++++++++++GOT REQUEST+++++++++++++++++++++++++");
   return res.send("OK");
 });
 app.listen(port, "0.0.0.0", () => {
