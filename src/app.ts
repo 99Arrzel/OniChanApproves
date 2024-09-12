@@ -1,5 +1,5 @@
 import express from "express";
-
+import bodyParser from "body-parser";
 type WebHookPayload = {
   serverUrl: string;
   taskId: string;
@@ -36,6 +36,7 @@ type WebHookPayload = {
 };
 
 const app = express();
+app.use(bodyParser.json());
 const port = 3000;
 const POSITIVE_REACTIONS = ["airkiss", "celebrate", "cheers", "yes"];
 const NEGATIVE_REACTIONS = ["angrystare", "no", "mad", "stop"];
