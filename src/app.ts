@@ -1,5 +1,6 @@
 import express from "express";
 import bodyParser from "body-parser";
+import { Octokit } from "@octokit/rest";
 type WebHookPayload = {
   serverUrl: string;
   taskId: string;
@@ -34,7 +35,9 @@ type WebHookPayload = {
     "sonar.analysis.detectedci": string;
   };
 };
-
+const octokit = new Octokit({
+  auth: process.env.GITHUB_TOKEN,
+});
 const app = express();
 app.use(bodyParser.json());
 const port = 3000;
@@ -54,15 +57,16 @@ app.get("/", async (req, res) => {
   });
 });
 app.post("/", async (req, res) => {
-  console.log("+++++++++++++++++++++++++GOT PAYLOAD+++++++++++++++++++++++++");
-
-  console.log(req.body);
-
-  console.log("+++++++++++++++++++++++++GOT PAYLOAD+++++++++++++++++++++++++");
-
-  console.log("+++++++++++++++++++++++++GOT REQUEST+++++++++++++++++++++++++");
-  console.log(req);
-  console.log("+++++++++++++++++++++++++GOT REQUEST+++++++++++++++++++++++++");
+  const payload = req.body as WebHookPayload;
+  if(payload.qualityGate.status === "ERROR") {
+    //Enviar mensaje por github...
+    // const response = await octokit.rest.issues.createComment({
+    //   owner: "",
+    //   repo: "",
+    //   issue_number: 1,
+    //   body: `Sonar Quality Gate: ${payload.qualityGate.name} - ${payload.qualityGate.status}`
+    // })
+  }
   return res.send("OK");
 });
 app.listen(port, "0.0.0.0", () => {
