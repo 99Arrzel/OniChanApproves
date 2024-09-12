@@ -22,6 +22,6 @@ app.post("/", async (req, res) => {
   return res.send("OK");
 });
 
-app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`);
+app.listen(port, '0.0.0.0', () => {
+  console.log(`App listening on port ${port}`);
 });
