@@ -1,0 +1,9 @@
+services:
+  php:
+    restart: unless-stopped
+    container_name: onichanapproves
+    build:
+      context: .
+      dockerfile: dockerfile
+    ports:
+      - 3000:3000
