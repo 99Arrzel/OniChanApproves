@@ -56,7 +56,8 @@ app.get("/", async (req, res) => {
 });
 app.post("/", async (req, res) => {
   const payload = req.body as WebHookPayload;
-  if(payload.qualityGate.status === "ERROR") {
+  console.log(payload);
+  // if(payload.qualityGate.status === "ERROR") {
     //Enviar mensaje por github...
     // const response = await octokit.rest.issues.createComment({
     //   owner: "",
@@ -64,7 +65,7 @@ app.post("/", async (req, res) => {
     //   issue_number: 1,
     //   body: `Sonar Quality Gate: ${payload.qualityGate.name} - ${payload.qualityGate.status}`
     // })
-  }
+  // }
   return res.send("OK");
 });
 app.listen(port, "0.0.0.0", () => {
