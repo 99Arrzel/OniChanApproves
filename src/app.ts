@@ -47,11 +47,9 @@ const NEGATIVE_REACTIONS = ["angrystare", "no", "mad", "stop"];
 app.get("/", async (req, res) => {
   const randomPositive =
     POSITIVE_REACTIONS[Math.floor(Math.random() * POSITIVE_REACTIONS.length)];
-
   const gifEndpoint = `https://api.otakugifs.xyz/gif?reaction=${randomPositive}&format=gif`;
   const gifValue = await fetch(gifEndpoint).then((res) => res.json());
   console.log(gifValue);
-
   return res.send({
     gif: gifValue.url,
   });
